@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <parent>
+      <groupId>org.picketlink</groupId>
+      <artifactId>picketlink-di-parent</artifactId>
+      <version>2.1.2-SNAPSHOT</version>
+      <relativePath>parent</relativePath>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>org.picketlink</groupId>
+   <artifactId>picketlink-di-pom</artifactId>
+   <packaging>pom</packaging>
+   <name>PicketLink Dependency Injection- Aggregator</name>
+   <url>http://labs.jboss.org/portal/picketlink/</url>
+   <description>PicketLink Dependency Injection </description>
+
+   <modules>
+     <module>parent</module>
+     <module>picketlink-spring</module>
+   </modules>
+
+   <reporting>
+     <plugins>
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-javadoc-plugin</artifactId>
+         <configuration>
+           <aggregate>true</aggregate>
+         </configuration>
+        </plugin>
+     </plugins>
+   </reporting>
+
+</project>

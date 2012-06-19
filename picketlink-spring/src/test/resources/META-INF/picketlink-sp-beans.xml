@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="picketlink"
+		class="org.picketlink.identity.federation.core.config.PicketLinkType">
+		<property name="enableAudit" value="true" />
+		<property name="idpOrSP">
+			<bean id="spType"
+				class="org.picketlink.identity.federation.core.config.SPType">
+				<property name="serverEnvironment" value="tomcat" />
+				<property name="bindingType" value="REDIRECT" />
+				<property name="relayState" value="someURL" />
+				<property name="errorPage" value="/someerror.jsp" />
+				<property name="idpUsesPostBinding" value="true" />
+				<property name="supportsSignature" value="true"/>
+				<property name="identityURL" value="${idp.url::http://localhost:8080/idp/}" />
+				<property name="serviceURL" value="${idp.url::http://localhost:8080/employee/}" />
+			</bean>
+		</property>
+		<property name="handlers">
+			<bean id="handlersBean"
+				class="org.picketlink.identity.federation.core.handler.config.Handlers">
+				<property name="handlers">
+				    <list>
+				      <bean class="org.picketlink.identity.federation.core.handler.config.Handler">
+				        <property name="clazz" value="org.picketlink.identity.federation.web.handlers.saml2.SAML2IssuerTrustHandler"/>
+				      </bean>
+				      <bean class="org.picketlink.identity.federation.core.handler.config.Handler">
+				        <property name="clazz" value="org.picketlink.identity.federation.web.handlers.saml2.SAML2LogOutHandler"/>
+				      </bean>
+				      <bean class="org.picketlink.identity.federation.core.handler.config.Handler">
+				        <property name="clazz" value="org.picketlink.identity.federation.web.handlers.saml2.SAML2AuthenticationHandler"/>
+				      </bean>
+				      <bean class="org.picketlink.identity.federation.core.handler.config.Handler">
+				        <property name="clazz" value="org.picketlink.identity.federation.web.handlers.saml2.RolesGenerationHandler"/>
+				      </bean>
+				    </list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+</beans>
